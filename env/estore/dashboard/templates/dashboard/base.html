@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    {% block dashboard_title %}{% endblock dashboard_title %}
+{% endblock title %}
+
+{% block content %}
+<nav class="bg-gray-50 dark:bg-gray-700 rounded-xl mb-3">
+    <div class="max-w-screen-xl px-4 py-3 mx-auto">
+        <div class="flex items-center">
+            <ul class="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
+                <li>
+                    <a href="{% url 'dashboard:dashboard' %}" class="text-gray-900 dark:text-white hover:underline uppercase" aria-current="page">Items</a>
+                </li>
+                <li>
+                    <a href="{% url 'item:new' %}" class="text-gray-900 dark:text-white hover:underline uppercase">Add item</a>
+                </li>
+                <li>
+                    <a href="{% url 'conversation:inbox' %}" class="text-gray-900 dark:text-white hover:underline uppercase">Inbox</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase">Cart</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase">Profile [{{ request.user.username }}]</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block dashboard_content %}{% endblock dashboard_content %}
+{% endblock content %}
