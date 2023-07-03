@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'item',
     'dashboard',
     'conversation',
+    'cart',
     # imported
     'crispy_forms',
     'crispy_tailwind',
