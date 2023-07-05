@@ -5,28 +5,14 @@
 {% endblock title %}
 
 {% block content %}
-<nav class="bg-gray-50 dark:bg-gray-700 rounded-xl mb-3">
-    <div class="max-w-screen-xl px-4 py-3 mx-auto">
-        <div class="flex items-center">
-            <ul class="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
-                <li>
-                    <a href="{% url 'dashboard:dashboard' %}" class="text-gray-900 dark:text-white hover:underline uppercase" aria-current="page">Items</a>
-                </li>
-                <li>
-                    <a href="{% url 'item:new' %}" class="text-gray-900 dark:text-white hover:underline uppercase">Add item</a>
-                </li>
-                <li>
-                    <a href="{% url 'conversation:inbox' %}" class="text-gray-900 dark:text-white hover:underline uppercase">Inbox</a>
-                </li>
-                <li>
-                    <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase">Cart</a>
-                </li>
-                <li>
-                    <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase">Profile [{{ request.user.username }}]</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-{% block dashboard_content %}{% endblock dashboard_content %}
+<div class="container">
+    <nav class="nav bg-body-secondary">
+        <a class="nav-link text-uppercase text-dark" href="{% url 'dashboard:dashboard' %}">Profile [{{ request.user.username }}]</a>
+        <a class="nav-link text-uppercase text-dark" href="{% url 'conversation:inbox' %}">Inbox</a>
+        <a class="nav-link text-uppercase text-dark" href="{% url 'dashboard:items' %}">My Items</a>
+        <a class="nav-link text-uppercase text-dark" href="{% url 'cart:cart' %}">My Cart</a>
+        <a class="nav-link text-uppercase text-dark" href="{% url 'cart:orders' %}">My Orders</a>
+    </nav>
+    {% block dashboard_content %}{% endblock dashboard_content %}
+</div>
 {% endblock content %}

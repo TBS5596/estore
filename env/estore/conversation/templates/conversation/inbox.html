@@ -5,24 +5,27 @@
 {% load crispy_forms_tags %}
 
 {% block dashboard_content %}
-<div class="space-y-6">
+<div class="p-2">
     {% for conversation in conversations %}
-    <a href="{% url 'conversation:detail' conversation.id %}">
-        <div class="p-6 flex bg-gray-100 rounded-xl">
-            <div class="pr-6">
-                <img src="{{ conversation.item.image.url }}" alt="img" class="w-20 rounded-xl">
-            </div>
-
-            <div>
-                {% for member in conversation.members.all %}
-                    {% if member != request.user %}
-                        <p class="mb-4"><strong>{{ member.username }}</strong> | {{ conversation.modified_at }}</p>
-                        <p>{{ conversation.item.name }}</p>
-                    {% endif %}
-                {% endfor %}
-            </div>
+    <div class="row my-1">
+        <div class="col bg-body-secondary rounded p-3">
+            <a href="{% url 'conversation:detail' conversation.id %}" class="text-dark text-decoration-none">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="{{ conversation.item.image.url }}" alt="img" class="img-fluid">
+                    </div>
+                    <div class="col-md-11">
+                        {% for member in conversation.members.all %}
+                        {% if member != request.user %}
+                            <p class="text-dark"><strong>{{ member.username }}</strong> | {{ conversation.modified_at }}</p>
+                            <p class="text-dark">{{ conversation.item.name }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </a>
         </div>
-    </a>
+    </div>
     {% endfor %}
 </div>
 {% endblock dashboard_content %}

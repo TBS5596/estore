@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'cart',
     # imported
     'crispy_forms',
-    'crispy_tailwind',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +130,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 MEDIA_URL = 'media/'
 
@@ -143,6 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # crispy forms configuration
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
-CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

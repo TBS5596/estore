@@ -8,24 +8,26 @@ from .forms import AddToCartForm, AddToOrderForm
 
 @login_required
 def index(request):
-    cart_items = Cart.objects.filter(user=request.user).filter(ordered=False)
+    cart_items = Cart.objects.filter(user=request.user).filter(is_ordered=False)
     context = {
         'cart_items': cart_items
     }
     return render(request, 'cart/index.html', context)
 
 @login_required
-def add(request, item_pk):
+def add(request, pk):
+    item = get_object_or_404(Item, pk=pk)
     if request.method == 'POST':
         form = AddToCartForm(request.POST)
         if form.is_valid():
-            cart_item = form.save(commit=False)
-            cart_item.item = get_object_or_404(Item, pk=item_pk)
-            cart_item.user = request.user
-            cart_item.cal_total() 
+            cart_item = Cart.objects.create(item=Item, user=request.user, quantity=form.cleaned_data['quantity'])
+            print(f'before calc @s {cart_item.id} {cart_item.item_id} {cart_item.quantity} {cart_item.total_price}')
+            cart_item.cal_total()
+            print(f'after calc @s {cart_item.id} {cart_item.item_id} {cart_item.quantity} {cart_item.total_price}')
             cart_item.save()
-            return redirect('item:detail', pk=item_pk)
-    return redirect('item:detail', pk=item_pk)
+            print(f'saved @s {cart_item.id} {cart_item.item_id} {cart_item.quantity} {cart_item.total_price}')
+            return redirect('cart:cart', pk=pk)
+    return redirect('item:detail', pk=pk)
 
 @login_required
 def edit(request, pk):

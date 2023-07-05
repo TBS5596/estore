@@ -57,7 +57,10 @@ def edit(request, pk):
             return redirect('item:detail', pk=item.id)
     else:
         form = EditItemForm(instance=item)
-    context = {'form': form}
+    context = {
+        'form': form,
+        'item': item,
+    }
     return render(request, 'item/edit.html', context)
 
 @login_required
